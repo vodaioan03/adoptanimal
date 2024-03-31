@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Stilizare pentru fundalul paginii */
+.bg-dog-background {
+  background-image: url('images/background.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Stilizare pentru conținutul paginii */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Stilizare pentru titluri */
+h2 {
+  @apply text-4xl font-bold text-white mb-8;
+}
+
+/* Stilizare pentru text */
+p {
+  @apply text-gray-300 text-lg mb-12;
+}
+
+/* Stilizare pentru imagini */
+img {
+  @apply w-full h-64 object-cover mb-8;
+}
+
+/* Stilizare pentru card-uri */
+.card {
+  @apply rounded-lg overflow-hidden shadow-md bg-white mb-8;
+}
+
+/* Stilizare pentru titlurile din card-uri */
+.card h3 {
+  @apply text-lg font-semibold mb-2;
+}
+
+/* Stilizare pentru textul din card-uri */
+.card p {
+  @apply text-gray-700;
+}

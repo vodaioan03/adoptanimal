@@ -1,0 +1,22 @@
+# Ignore node_modules directory
+frontend/node_modules/
+
+# Ignore build directory
+frontend/build/
+
+# Ignore IDE/Editor specific files
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Ignore Spring Boot specific files
+*.class
+*.jar
+*.war
+target/
+
+# Ignore IDE/Editor specific files for backend (if applicable)
+# Add more lines here if needed
+
+# Ignore any other files or directories specific to your development environment or tools

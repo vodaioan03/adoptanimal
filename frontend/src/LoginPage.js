@@ -1,3 +1,5 @@
+// LoginPage.js
+import "./main.css"
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -40,8 +42,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen">
-      <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="bg-gray-100 h-screen">
+      <div className="flex flex-col items-center justify-center h-screen">
         <h2 className="text-3xl font-bold text-gray-800 mb-4">Login</h2>
         <form onSubmit={handleSubmit} className="max-w-md mx-auto">
           <div className="mb-4">

@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 .App {
   text-align: center;
 }
@@ -40,4 +43,15 @@
 
 .bg-dog-background {
   background-image: url('images/background.jpg');
+}
+.navbar-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.fixlayout {
+  padding-top: 60px; /* Asigură un spațiu între navbar și conținut */
+  min-height: calc(100vh - 60px); /* Înălțimea minimă a conținutului este înălțimea ferestrei vizibile minus înălțimea navbar-ului */
 }

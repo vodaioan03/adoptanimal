@@ -11,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import adoptanimal.ro.adoptanimal.User2.UserService;
+import adoptanimal.ro.adoptanimal.user.UserService;
 
 @Component
 public class SecurityBeansInjector {

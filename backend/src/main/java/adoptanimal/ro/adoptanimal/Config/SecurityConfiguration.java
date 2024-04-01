@@ -14,8 +14,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import adoptanimal.ro.adoptanimal.User2.UserService;
 import adoptanimal.ro.adoptanimal.user.Permission;
+import adoptanimal.ro.adoptanimal.user.UserService;
 
 @Configuration
 @EnableWebSecurity

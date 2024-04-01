@@ -11,8 +11,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import adoptanimal.ro.adoptanimal.User2.Adress;
-import adoptanimal.ro.adoptanimal.User2.Gender;
 import java.util.List;
 
 @Document(value="users")
@@ -35,7 +33,7 @@ public class MyUser implements UserDetails {
   private LocalDateTime createdTime;
 
   public MyUser() {
-    
+
   }
 
   public MyUser(String username, String password, Role role, String email, String phoneNumber, String firstName,

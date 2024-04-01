@@ -1,4 +1,4 @@
-package adoptanimal.ro.adoptanimal.User2;
+package adoptanimal.ro.adoptanimal.user;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -11,8 +11,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import adoptanimal.ro.adoptanimal.user.MyUser;
-import adoptanimal.ro.adoptanimal.user.UserRepository;
 import jakarta.validation.ConstraintViolationException;
 
 @Service

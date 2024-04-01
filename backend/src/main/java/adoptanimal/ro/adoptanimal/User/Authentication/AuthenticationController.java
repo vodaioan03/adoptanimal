@@ -32,8 +32,6 @@ public class AuthenticationController {
   @PostMapping("/authenticate")
   public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest request) {
     try {
-      System.err.println(request.getUsername());
-      System.err.println(request.getPassword());
       return new ResponseEntity<AuthenticationResponse>(authenticatioService.login(request),HttpStatus.OK);
     } catch (ConstraintViolationException e) {
       return new ResponseEntity<>(e.getMessage(),HttpStatus.UNPROCESSABLE_ENTITY);

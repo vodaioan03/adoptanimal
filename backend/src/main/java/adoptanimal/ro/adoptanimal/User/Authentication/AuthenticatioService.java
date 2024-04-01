@@ -1,10 +1,11 @@
 package adoptanimal.ro.adoptanimal.user.Authentication;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import org.eclipse.jgit.transport.CredentialItem.Password;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,7 +35,7 @@ public class AuthenticatioService {
 
   public AuthenticationResponse register(MyUser request) {
     MyUser user = new MyUser(request.getUsername(),passwordEncoder.encode(request.getPassword()),request.getRole(),request.getEmail(),request.getPhoneNumber(),request.getFirstName(),request.getLastName(),request.getGender(),request.getAdress(),request.getBirthDate());
-    System.err.println(user);
+    user.setCreatedTime(LocalDateTime.now());
     userRepository.save(user);
     String token = jwtService.generateToken(user, generateExtraClaims(user));
     return new AuthenticationResponse(token);
@@ -45,16 +46,10 @@ public class AuthenticatioService {
   }
 
   public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
-    System.err.println(authenticationRequest);
     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-    System.err.println(authToken);
-
     authenticationManager.authenticate(authToken);
     MyUser user = userRepository.findUserByUsername(authenticationRequest.getUsername()).get();
     String jwt = jwtService.generateToken(user,generateExtraClaims(user));
-    System.err.println(jwt);
-    System.err.print(user.getRole() + "\n");
-    System.err.print(user.getAuthorities());
     return new AuthenticationResponse(jwt);
 
    }

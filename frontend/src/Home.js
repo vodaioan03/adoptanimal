@@ -1,13 +1,14 @@
 import React from 'react';
 import './Home.css';
+import './main.css'
 import dog1 from './images/dog1.jpg';
 import dog2 from './images/dog2.jpg';
 import dog3 from './images/dog3.jpg';
 
 const HomePage = () => {
   return (
-    <div className="bg-gray-100 min-h-screen pt-16" >
-      <div className="bg-dog-background bg-cover bg-center min-h-screen relative">
+    <div className="bg-gray-100 h-screen" >
+      <div className="bg-dog-background bg-cover bg-center h-screen relative">
         <div className="absolute inset-0 bg-gray-900 bg-opacity-50"></div>
         <div className="container mx-auto py-8 px-4 relative z-10 text-center">
           <h2 className="text-4xl font-bold text-white mb-8">About Our Shelter</h2>

@@ -11,8 +11,13 @@ const RegisterPage = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [gender, setGender] = useState('');
+  const [country, setCountry] = useState('');
+  const [city, setCity] = useState('');
+  const [address, setAddress] = useState('');
+  const [zipCode, setZipCode] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -46,10 +51,29 @@ const RegisterPage = () => {
     setPhoneNumber(event.target.value);
   };
 
+  const handleGenderChange = (event) => {
+    setGender(event.target.value);
+  };
+
+  const handleCountryChange = (event) => {
+    setCountry(event.target.value);
+  };
+
+  const handleCityChange = (event) => {
+    setCity(event.target.value);
+  };
+
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
+  };
+
+  const handleZipCodeChange = (event) => {
+    setZipCode(event.target.value);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // Verificăm dacă adresa de email și parola sunt confirmate
       if (email !== confirmEmail) {
         setError('Emails do not match');
         return;
@@ -58,7 +82,7 @@ const RegisterPage = () => {
         setError('Passwords do not match');
         return;
       }
-  
+
       const response = await fetch('http://localhost:8080/auth/register', {
         method: 'POST',
         headers: {
@@ -71,10 +95,17 @@ const RegisterPage = () => {
           firstName,
           lastName,
           role: 'MEMBER',
-          phoneNumber
+          phoneNumber,
+          gender,
+          address: {
+            country,
+            city,
+            address,
+            zipCode
+          }
         }),
       });
-  
+
       if (response.ok) {
         console.log('Registration successful');
         navigate('/login');
@@ -87,7 +118,6 @@ const RegisterPage = () => {
       setError('An unexpected error occurred. Please try again later.');
     }
   };
-  
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -190,6 +220,68 @@ const RegisterPage = () => {
                 required
               />
             </div>
+          </div>
+          <div className="mb-4">
+            <label htmlFor="gender" className="block text-gray-700 text-sm font-bold mb-2">Gender</label>
+            <select
+              id="gender"
+              value={gender}
+              onChange={handleGenderChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+              required
+            >
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div className="flex justify-between mb-4">
+            <div className="w-full">
+              <label htmlFor="country" className="block text-gray-700 text-sm font-bold mb-2">Country</label>
+              <input
+                type="text"
+                id="country"
+                value={country}
+                onChange={handleCountryChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                required
+              />
+            </div>
+          </div>
+          <div className="flex justify-between mb-4">
+            <div className="w-1/2 mr-2">
+              <label htmlFor="city" className="block text-gray-700 text-sm font-bold mb-2">City</label>
+              <input
+                type="text"
+                id="city"
+                value={city}
+                onChange={handleCityChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                required
+              />
+            </div>
+            <div className="w-1/2 ml-2">
+              <label htmlFor="zipCode" className="block text-gray-700 text-sm font-bold mb-2">Zip Code</label>
+              <input
+                type="text"
+                id="zipCode"
+                value={zipCode}
+                onChange={handleZipCodeChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                required
+              />
+            </div>
+          </div>
+          <div className="mb-4">
+            <label htmlFor="address" className="block text-gray-700 text-sm font-bold mb-2">Address</label>
+            <textarea
+              id="address"
+              value={address}
+              onChange={handleAddressChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+              required
+            ></textarea>
           </div>
           <button type="submit" className="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600">Register</button>
           {error && <p className="text-red-500 mt-2">{error}</p>}

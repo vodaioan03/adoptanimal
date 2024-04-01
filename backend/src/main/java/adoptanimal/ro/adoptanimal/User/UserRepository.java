@@ -1,4 +1,4 @@
-package adoptanimal.ro.adoptanimal.User;
+package adoptanimal.ro.adoptanimal.user;
 
 import java.util.Optional;
 

@@ -18,7 +18,7 @@ const LoginPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:8080/login', {
+      const response = await fetch('http://localhost:8080/auth/authenticate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -27,18 +27,15 @@ const LoginPage = () => {
       });
 
       if (response.ok) {
-        // Utilizatorul s-a autentificat cu succes
         console.log('Login successful');
-        // Redirecționați către o altă pagină sau faceți alte acțiuni aici
-        navigate.push('/home'); // Exemplu de redirecționare către pagina de dashboard
+        navigate('/'); 
       } else {
-        // Autentificare eșuată
         console.error('Login failed');
-        setError('Invalid username or password.'); // Setarea mesajului de eroare pentru afișare
+        setError('Invalid username or password.'); 
       }
     } catch (error) {
       console.error('Error during login:', error);
-      setError('An unexpected error occurred. Please try again later.'); // Setarea mesajului de eroare pentru afișare
+      setError('An unexpected error occurred. Please try again later.');
     }
   };
 
@@ -71,7 +68,7 @@ const LoginPage = () => {
           </div>
           <button type="submit" className="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600">Login</button>
         </form>
-        {error && <p className="text-red-500 mt-4 text-sm">{error}</p>} {/* Afișarea mesajului de eroare, dacă există */}
+        {error && <p className="text-red-500 mt-4 text-sm">{error}</p>} {}
         <p className="text-gray-600 mt-4 text-sm">Don't have an account? <Link to="/register" className="text-indigo-500 hover:underline">Register</Link></p>
       </div>
     </div>

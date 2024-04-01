@@ -1,4 +1,4 @@
-package adoptanimal.ro.adoptanimal.User;
+package adoptanimal.ro.adoptanimal.User2;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import adoptanimal.ro.adoptanimal.user.MyUser;
+import adoptanimal.ro.adoptanimal.user.UserRepository;
 import jakarta.validation.ConstraintViolationException;
 
 @Service
@@ -47,19 +49,12 @@ public void saveEntity(MyUser user) throws ConstraintViolationException,Exceptio
       return User.builder()
                               .username(object.getUsername())
                               .password(object.getPassword())
-                              .roles(getRoles(object))
+                              .authorities(object.getAuthorities())
                               .build();
     }
     else{
       throw new UsernameNotFoundException(username);
     }
-  }
-
-  private String[] getRoles(MyUser user) {
-    if (user.getRole() == null) {
-      return new String[]{"USER"};
-    }
-    return user.getRole().split(",");
   }
   
 }

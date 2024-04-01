@@ -1,4 +1,4 @@
-package adoptanimal.ro.adoptanimal.User;
+package adoptanimal.ro.adoptanimal.User2;
 
 import lombok.Data;
 

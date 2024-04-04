@@ -1,4 +1,4 @@
-package adoptanimal.ro.adoptanimal.Config;
+package adoptanimal.ro.adoptanimal.config;
 
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +14,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import adoptanimal.ro.adoptanimal.user.Permission;
-import adoptanimal.ro.adoptanimal.user.UserService;
+import adoptanimal.ro.adoptanimal.user.model.permission;
+import adoptanimal.ro.adoptanimal.user.service.userService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
   @Autowired
-  UserService userService;
+  userService userService;
   @Autowired
   AuthenticationProvider authenticationProvider;
 
@@ -36,9 +36,9 @@ public class SecurityConfiguration {
       .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
       .authorizeHttpRequests(registry -> {
       registry.requestMatchers("/auth/**","/home/**").permitAll();
-      registry.requestMatchers("/admin/**").hasAuthority(Permission.USER_ADMIN.name());
-      registry.requestMatchers("/member/**","/api/animal/**").hasAuthority(Permission.USER_MEMBER.name());
-      registry.requestMatchers("/developer/**").hasAuthority(Permission.USER_DEVELOPER.name());
+      registry.requestMatchers("/admin/**").hasAuthority(permission.USER_ADMIN.name());
+      registry.requestMatchers("/member/**","/api/animal/**").hasAuthority(permission.USER_MEMBER.name());
+      registry.requestMatchers("/developer/**").hasAuthority(permission.USER_DEVELOPER.name());
       registry.anyRequest().authenticated();
     })
     .build();

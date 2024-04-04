@@ -1,4 +1,4 @@
-package adoptanimal.ro.adoptanimal.Config;
+package adoptanimal.ro.adoptanimal.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

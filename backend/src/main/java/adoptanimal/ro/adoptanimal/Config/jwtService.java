@@ -1,4 +1,4 @@
-package adoptanimal.ro.adoptanimal.Config;
+package adoptanimal.ro.adoptanimal.config;
 
 import java.security.Key;
 import java.util.Date;
@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import adoptanimal.ro.adoptanimal.user.MyUser;
+import adoptanimal.ro.adoptanimal.user.model.myUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -22,7 +22,7 @@ public class jwtService {
   @Value("${security.jwt.secret-key}")
   private String SECRET_KEY;
 
-  public String generateToken(MyUser user, Map<String, Object> extraClaims) {
+  public String generateToken(myUser user, Map<String, Object> extraClaims) {
 
     Date issuedAt = new Date(System.currentTimeMillis());
     Date expirationAt = new Date(issuedAt.getTime() + (EXPIRATION_MINUTES * 60 * 1000));

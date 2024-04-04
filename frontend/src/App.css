@@ -50,8 +50,3 @@
   left: 0;
   right: 0;
 }
-
-.fixlayout {
-  padding-top: 60px; /* Asigură un spațiu între navbar și conținut */
-  min-height: calc(100vh - 60px); /* Înălțimea minimă a conținutului este înălțimea ferestrei vizibile minus înălțimea navbar-ului */
-}

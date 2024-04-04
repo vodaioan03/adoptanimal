@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Navbar from './navbar';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
@@ -121,9 +120,8 @@ const RegisterPage = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      <Navbar />
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">Register</h2>
+      <div className="flex flex-col items-center justify-center min-h-screen"style={{ marginTop: '60px' }}>
+        <h2 className="text-3xl font-bold text-gray-800 mb-4" style={{ marginTop: '20px' }}>Register</h2>
         <form onSubmit={handleSubmit} className="max-w-md mx-auto">
           <div className="flex justify-between mb-4">
             <div className="w-1/2 mr-2">
@@ -286,7 +284,7 @@ const RegisterPage = () => {
           <button type="submit" className="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600">Register</button>
           {error && <p className="text-red-500 mt-2">{error}</p>}
         </form>
-        <p className="text-gray-600 mt-4 text-sm">Already have an account? <Link to="/login" className="text-indigo-500 hover:underline">Login</Link></p>
+        <p className="text-gray-600 mt-4 text-sm" style={{ marginBottom: '20px' }}>Already have an account? <Link to="/login" className="text-indigo-500 hover:underline">Login</Link></p>
       </div>
     </div>
   );

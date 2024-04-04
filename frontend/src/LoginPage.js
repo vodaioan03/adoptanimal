@@ -1,13 +1,31 @@
-// LoginPage.js
 import "./main.css"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loginPageHeight, setLoginPageHeight] = useState(`${window.innerHeight}px`);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const updateLoginPageHeight = () => {
+      const navbarHeight = document.querySelector('.navbar-fixed')?.offsetHeight || 0;
+      const newLoginPageHeight = `calc(100vh - ${navbarHeight}px)`;
+      setLoginPageHeight(newLoginPageHeight);
+    };
+
+    updateLoginPageHeight();
+
+    window.addEventListener('resize', updateLoginPageHeight);
+    window.addEventListener('load', updateLoginPageHeight); // Adăugăm event listener pentru 'load'
+
+    return () => {
+      window.removeEventListener('resize', updateLoginPageHeight);
+      window.removeEventListener('load', updateLoginPageHeight); // Eliberăm event listener-ul pentru 'load'
+    };
+  }, []);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -29,6 +47,8 @@ const LoginPage = () => {
       });
 
       if (response.ok) {
+        console.log('Raspuns');
+        console.log(response);
         console.log('Login successful');
         navigate('/'); 
       } else {
@@ -42,8 +62,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="bg-gray-100 h-screen">
-      <div className="flex flex-col items-center justify-center h-screen">
+    <div className="bg-gray-100" style={{ height: loginPageHeight }}>
+      <div className="flex flex-col items-center justify-center h-full">
         <h2 className="text-3xl font-bold text-gray-800 mb-4">Login</h2>
         <form onSubmit={handleSubmit} className="max-w-md mx-auto">
           <div className="mb-4">

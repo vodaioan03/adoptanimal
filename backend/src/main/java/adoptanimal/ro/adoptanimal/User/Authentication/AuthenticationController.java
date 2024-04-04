@@ -1,4 +1,4 @@
-package adoptanimal.ro.adoptanimal.user.Authentication;
+package adoptanimal.ro.adoptanimal.user.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import adoptanimal.ro.adoptanimal.user.MyUser;
+import adoptanimal.ro.adoptanimal.user.model.myUser;
 import jakarta.validation.ConstraintViolationException;
 
 @RestController
@@ -19,7 +19,7 @@ public class AuthenticationController {
   private AuthenticatioService authenticatioService;
 
   @PostMapping("/register")
-  public ResponseEntity<?> register(@RequestBody MyUser request) {
+  public ResponseEntity<?> register(@RequestBody myUser request) {
     try {
       return new ResponseEntity<AuthenticationResponse>(authenticatioService.register(request),HttpStatus.OK);
     } catch (ConstraintViolationException e) {

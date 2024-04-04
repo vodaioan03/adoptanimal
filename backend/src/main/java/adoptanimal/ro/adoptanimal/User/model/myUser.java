@@ -1,4 +1,4 @@
-package adoptanimal.ro.adoptanimal.user;
+package adoptanimal.ro.adoptanimal.user.model;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -14,30 +14,30 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.List;
 
 @Document(value="users")
-public class MyUser implements UserDetails {
+public class myUser implements UserDetails {
   @Id
   private String id;
   @Indexed(unique = true)
   private String username;
   private String password;
-  private Role role;
+  private role role;
   @Indexed(unique = true)
   private String email;
   @Indexed(unique = true)
   private String phoneNumber;
   private String firstName;
   private String lastName;
-  private Gender gender;
-  private Adress adress;
+  private gender gender;
+  private address adress;
   private LocalDateTime birthDate;
   private LocalDateTime createdTime;
 
-  public MyUser() {
+  public myUser() {
 
   }
 
-  public MyUser(String username, String password, Role role, String email, String phoneNumber, String firstName,
-      String lastName, Gender gender, Adress adress, LocalDateTime birthDate) {
+  public myUser(String username, String password, role role, String email, String phoneNumber, String firstName,
+      String lastName, gender gender, address adress, LocalDateTime birthDate) {
     this.username = username;
     this.password = password;
     this.role = role;
@@ -49,7 +49,7 @@ public class MyUser implements UserDetails {
     this.adress = adress;
     this.birthDate = birthDate;
   }
-  public MyUser(String username, String password, Role role) {
+  public myUser(String username, String password, role role) {
     this.username = username;
     this.password = password;
     this.role = role;
@@ -89,10 +89,10 @@ public class MyUser implements UserDetails {
   public void setId(String id) {
     this.id = id;
   }
-  public Role getRole() {
+  public role getRole() {
     return role;
   }
-  public void setRole(Role role) {
+  public void setRole(role role) {
     this.role = role;
   }
   public String getEmail() {
@@ -119,16 +119,16 @@ public class MyUser implements UserDetails {
   public void setLastName(String lastName) {
     this.lastName = lastName;
   }
-  public Gender getGender() {
+  public gender getGender() {
     return gender;
   }
-  public void setGender(Gender gender) {
+  public void setGender(gender gender) {
     this.gender = gender;
   }
-  public Adress getAdress() {
+  public address getAdress() {
     return adress;
   }
-  public void setAdress(Adress adress) {
+  public void setAdress(address adress) {
     this.adress = adress;
   }
   public LocalDateTime getBirthDate() {

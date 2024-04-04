@@ -1,9 +1,9 @@
-package adoptanimal.ro.adoptanimal.user;
+package adoptanimal.ro.adoptanimal.user.model;
 
 import lombok.Data;
 
 @Data
-public class Adress {
+public class address {
   private String country;
   private String city;
   private String adress;

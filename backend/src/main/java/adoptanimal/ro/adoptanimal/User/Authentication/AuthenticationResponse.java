@@ -1,4 +1,4 @@
-package adoptanimal.ro.adoptanimal.user.Authentication;
+package adoptanimal.ro.adoptanimal.user.authentication;
 
 public class AuthenticationResponse {
   private String jwt;

@@ -1,4 +1,4 @@
-package adoptanimal.ro.adoptanimal.user.Authentication;
+package adoptanimal.ro.adoptanimal.user.authentication;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -12,16 +12,16 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import adoptanimal.ro.adoptanimal.Config.jwtService;
-import adoptanimal.ro.adoptanimal.user.MyUser;
-import adoptanimal.ro.adoptanimal.user.UserRepository;
+import adoptanimal.ro.adoptanimal.config.jwtService;
+import adoptanimal.ro.adoptanimal.user.model.myUser;
+import adoptanimal.ro.adoptanimal.user.repository.userRepository;
 
 @Service
 public class AuthenticatioService {
   @Autowired
   private AuthenticationManager authenticationManager;
   @Autowired
-  UserRepository userRepository;
+  userRepository userRepository;
   @Autowired
   private jwtService jwtService;
 
@@ -33,27 +33,26 @@ public class AuthenticatioService {
     this.passwordEncoder = passwordEncoder;
   }
 
-  public AuthenticationResponse register(MyUser request) {
-    MyUser user = new MyUser(request.getUsername(),passwordEncoder.encode(request.getPassword()),request.getRole(),request.getEmail(),request.getPhoneNumber(),request.getFirstName(),request.getLastName(),request.getGender(),request.getAdress(),request.getBirthDate());
+  public AuthenticationResponse register(myUser request) {
+    myUser user = new myUser(request.getUsername(),passwordEncoder.encode(request.getPassword()),request.getRole(),request.getEmail(),request.getPhoneNumber(),request.getFirstName(),request.getLastName(),request.getGender(),request.getAdress(),request.getBirthDate());
     user.setCreatedTime(LocalDateTime.now());
     userRepository.save(user);
     String token = jwtService.generateToken(user, generateExtraClaims(user));
     return new AuthenticationResponse(token);
   }
 
-  public Optional<MyUser> getUserRequest(AuthenticationRequest authenticationRequest){
+  public Optional<myUser> getUserRequest(AuthenticationRequest authenticationRequest){
     return userRepository.findUserByUsername(authenticationRequest.getUsername()); 
   }
 
   public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
-    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-    authenticationManager.authenticate(authToken);
-    MyUser user = userRepository.findUserByUsername(authenticationRequest.getUsername()).get();
-    String jwt = jwtService.generateToken(user,generateExtraClaims(user));
-    return new AuthenticationResponse(jwt);
-
+      UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+      authenticationManager.authenticate(authToken);
+      myUser user = userRepository.findUserByUsername(authenticationRequest.getUsername()).get();
+      String jwt = jwtService.generateToken(user,generateExtraClaims(user));
+      return new AuthenticationResponse(jwt); 
    }
-  private Map<String, Object> generateExtraClaims(MyUser user) {
+  private Map<String, Object> generateExtraClaims(myUser user) {
     Map<String, Object> extraClaims = new HashMap<>();
     extraClaims.put("firstname",user.getFirstName());
     extraClaims.put("lastname", user.getLastName());

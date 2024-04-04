@@ -1,47 +1,205 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.homepage {
+  font-family: Arial, sans-serif;
+  color: #333;
+}
 
-/* Stilizare pentru fundalul paginii */
-.bg-dog-background {
-  background-image: url('images/background.jpg');
+.banner {
+  height: 400px;
   background-size: cover;
   background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
 }
 
-/* Stilizare pentru conținutul paginii */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+.banner-content {
+  max-width: 600px;
 }
 
-/* Stilizare pentru titluri */
-h2 {
-  @apply text-4xl font-bold text-white mb-8;
+.banner h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
 }
 
-/* Stilizare pentru text */
-p {
-  @apply text-gray-300 text-lg mb-12;
+.banner p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
 }
 
-/* Stilizare pentru imagini */
-img {
-  @apply w-full h-64 object-cover mb-8;
+.banner button {
+  padding: 10px 20px;
+  background-color: #ff4500;
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
 }
 
-/* Stilizare pentru card-uri */
-.card {
-  @apply rounded-lg overflow-hidden shadow-md bg-white mb-8;
+.about {
+  padding: 50px 0; /* Spațiul între conținut și margini */
+  background-color: #f9f9f9; /* Culoarea de fundal */
+  text-align: center; /* Alinierea textului la centru */
 }
 
-/* Stilizare pentru titlurile din card-uri */
-.card h3 {
-  @apply text-lg font-semibold mb-2;
+.about h2 {
+  font-size: 2rem; /* Dimensiunea titlului */
+  color: #333; /* Culoarea titlului */
+  margin-bottom: 20px; /* Spațiul între titlu și paragraf */
 }
 
-/* Stilizare pentru textul din card-uri */
-.card p {
-  @apply text-gray-700;
+.about p {
+  font-size: 1.1rem; /* Dimensiunea textului */
+  color: #666; /* Culoarea textului */
+  line-height: 1.6; /* Înălțimea liniei */
+  max-width: 800px; /* Lățimea maximă a textului */
+  margin: 0 auto; /* Centrarea paragrafului */
+}
+
+.testimonials {
+  background-color: #F4E4D7;
+  padding: 50px;
+  text-align: center; /* Centrare text */
+}
+
+.testimonials-navigation {
+  text-align: center;
+  margin-top: 20px; /* Spațiu între butoane și testimoniale */
+}
+
+
+.testimonial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.testimonial-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.testimonial-text {
+  color: #000;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  max-width: 800px; /* Setează o lățime maximă pentru text */
+  overflow: hidden; /* Ascunde textul care depășește lățimea maximă */
+  text-overflow: ellipsis; /* Adaugă puncte de suspensie la finalul textului tăiat */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.testimonials-title {
+  font-size: 1.8rem; /* Mărimea fontului */
+  font-weight: bold; /* Textul bold */
+  color: #333; /* Culoarea textului */
+  margin-bottom: 20px; /* Spațiu între titlu și testimoniale */
+}
+
+.cta {
+  background-color: #485a7f; /* Culoarea gri */
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.cta-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.cta-button {
+  padding: 15px 30px;
+  background-color: #007bff; /* Culoarea de fundal */
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #0056b3; /* Culoarea de fundal la hover */
+}
+
+.dog-images {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+
+.dog-images img {
+  width: 30%;
+  border-radius: 10px;
+}
+
+
+.cta-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 30px; /* Rotunjirea colțurilor butonului */
+  text-transform: uppercase;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Efect de tranziție pentru hover */
+}
+
+.cta-button:hover {
+  background-color: #fff;
+  color: #000;
+  border-color: #000;
+}
+
+
+.banner-button {
+  display: inline-block;
+  padding: 16px 32px;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 30px; /* Rotunjirea colțurilor butonului */
+  text-transform: uppercase;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s; /* Efect de tranziție pentru hover */
+}
+
+.banner-button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.prev-button,
+.next-button {
+  background-color: #ff4500;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px; /* Spațiu între butoane */
+}
+
+.prev-button:hover,
+.next-button:hover {
+  background-color: #cc3700;
 }

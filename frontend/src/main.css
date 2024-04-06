@@ -1,8 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
-.h-screen {
-  height: calc(100vh - 60px); /* Înălțimea minimă a conținutului este înălțimea ferestrei vizibile minus înălțimea navbar-ului */
-}

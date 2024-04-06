@@ -47,9 +47,9 @@ public class SecurityConfiguration {
   @Bean
   public CorsFilter corsFilter() {
       CorsConfiguration corsConfig = new CorsConfiguration();
-      corsConfig.addAllowedOrigin("*"); // Permită orice origine
-      corsConfig.addAllowedMethod("*"); // Permită toate metodele HTTP
-      corsConfig.addAllowedHeader("*"); // Permită toate headerele
+      corsConfig.addAllowedOrigin("*"); 
+      corsConfig.addAllowedMethod("*");
+      corsConfig.addAllowedHeader("*"); 
 
       UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
       source.registerCorsConfiguration("/**", corsConfig);

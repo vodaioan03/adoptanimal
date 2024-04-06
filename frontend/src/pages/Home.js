@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import bannerImage from './images/banner.jpeg'; // Imaginea pentru banner
-import dog1 from './images/dog1.jpg';
-import dog2 from './images/dog2.jpg';
-import dog3 from './images/dog3.jpg';
-import testimonial1 from './images/perosn/m1.jpg';
-import testimonial2 from './images/perosn/m2.jpg';
-import testimonial3 from './images/perosn/m3.jpg';
-import testimonial4 from './images/perosn/m4.jpg';
-import './Home.css';
+import bannerImage from '../images/banner.jpeg'; 
+import dog1 from '../images/dog1.jpg';
+import dog2 from '../images/dog2.jpg';
+import dog3 from '../images/dog3.jpg';
+import testimonial1 from '../images/perosn/m1.jpg';
+import testimonial2 from '../images/perosn/m2.jpg';
+import testimonial3 from '../images/perosn/m3.jpg';
+import testimonial4 from '../images/perosn/m4.jpg';
+import '../css/Home.css';
+//import Cookies from 'js-cookie';
 
 const HomePage = () => {
 
@@ -24,7 +25,6 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
-      {/* Banner Imaginativ */}
       <div className="banner" style={{ backgroundImage: `url(${bannerImage})`, height: '600px' }}>
         <div className="banner-content">
           <h1 className="banner-title">Descoperă iubirea cu un prieten necuvântător</h1>
@@ -32,15 +32,11 @@ const HomePage = () => {
           <a href="/dogs" className="banner-button">Adoptă Acum</a>
         </div>
       </div>
-
-      {/* Prezentare Descriptivă a Adăpostului */}
       <div className="about">
         <h2 className="about-title">Despre Noi</h2>
         <p className="about-description">Bine ai venit la Dog Shelter - adăpostul unde se împletesc destine. Suntem o echipă dedicată îngrijirii, protecției și adopției câinilor fără stăpân. Misiunea noastră este să găsim cămine fericite și iubitoare pentru fiecare patruped care trece pragul adăpostului nostru.</p>
         <p className="about-contact">Pentru mai multe informații sau pentru a ne contacta, accesează pagina noastră de <a href="/contact" className="about-contact-link">Contact</a>.</p>
       </div>
-
-      {/* Povești de Succes sau Testimoniale */}
       <div className="testimonials">
         <h2 className="testimonials-title">Povești de Succes</h2>
         <div className="testimonial">
@@ -51,13 +47,12 @@ const HomePage = () => {
         <button className="next-button" onClick={handleNextTestimonial}>{">"}</button>
       </div>
 
-      {/* Apel la Acțiune Clar */}
+
       <div className="cta">
         <h2 className="cta-title">Vrei să adopți?</h2>
         <a href="/dogs" className="cta-button">ADOPTĂ ACUM</a>
       </div>
 
-      {/* Imagini cu câini */}
       <div className="dog-images">
         <img src={dog1} alt="Dog 1" className="dog-image" />
         <img src={dog2} alt="Dog 2" className="dog-image" />

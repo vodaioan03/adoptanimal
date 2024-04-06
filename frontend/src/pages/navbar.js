@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+//import Cookies from 'js-cookie';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);

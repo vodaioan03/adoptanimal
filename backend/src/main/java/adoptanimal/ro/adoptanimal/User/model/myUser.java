@@ -54,6 +54,7 @@ public class myUser implements UserDetails {
     this.password = password;
     this.role = role;
   }
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     List<GrantedAuthority> authorities = role.getPermissions().stream().map(
@@ -61,7 +62,6 @@ public class myUser implements UserDetails {
     ).collect(Collectors.toList());
 
     authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
-
     return authorities;
   }
   

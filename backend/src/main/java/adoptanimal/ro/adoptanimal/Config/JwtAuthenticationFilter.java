@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import adoptanimal.ro.adoptanimal.user.model.myUser;
+import adoptanimal.ro.adoptanimal.user.model.permission;
 import adoptanimal.ro.adoptanimal.user.repository.userRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -22,28 +23,38 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
   private jwtService jwtservice;
   @Autowired
   private userRepository userRepository;
+  private int apiCalled = 0;
 
   @Override
-  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-      throws ServletException, IOException {
-   // 1 obtain header that contains jwt
-   String authHeader = request.getHeader("Authorization");
-   if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-    filterChain.doFilter(request, response);
-    return;
-   }
-   //2. Obtain jwt token
-   String jwt = authHeader.split(" ")[1];
-   //3. obtain subject/username in jwt
-   String username = jwtservice.extractUsername(jwt);
-   //4. Set authenticate object inside our security context
-   myUser user = userRepository.findUserByUsername(username).get();
-   UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, null, user.getAuthorities());
-   SecurityContextHolder.getContext().setAuthentication(authToken);
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
-   //5. execute rest of the filters
 
-   filterChain.doFilter(request, response);
-  }
+        String jwt = authHeader.split(" ")[1];
+
+        String refreshedJwt = jwtservice.refreshToken(jwt);
+        if (!refreshedJwt.equals(jwt)) {
+            
+            response.setHeader("Authorization", "Bearer " + refreshedJwt);
+        }
+
+        
+        String username = jwtservice.extractUsername(refreshedJwt);
+        myUser user = userRepository.findUserByUsername(username).orElse(null);
+        
+        if (user != null) {
+
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, null, user.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authToken);
+        }
+        System.err.println("["+ apiCalled + "]Api called by user: " + username);  
+        apiCalled++;
+        filterChain.doFilter(request, response);
+    }
 
 }

@@ -28,6 +28,7 @@ public class Animal {
   private String givenName;
   @NotNull(message = "Breed cannot be null")
   private String breed;
+  private String image = "https://i.imgur.com/iiTbkfx.jpg";
   private LocalDateTime birthdayDate = null;
   private Integer age = null;
   private LocalDateTime createdTime;
@@ -57,10 +58,12 @@ public class Animal {
   public Animal(@JsonProperty("idNumber") String idNumber,
                 @JsonProperty("givenName") String givenName, 
                 @JsonProperty("breed") String breed, 
-                @JsonProperty("birthdayDate") String birthdayDate) {
+                @JsonProperty("birthdayDate") String birthdayDate,
+                @JsonProperty("image") String image) {
     this.idNumber = idNumber;
     this.givenName = givenName;
     this.breed = breed;
+    this.image = image;
     String[] splitted = birthdayDate.split("\\-");
     System.out.println(splitted[0]);
     this.birthdayDate = LocalDateTime.of(Integer.parseInt(splitted[0]),Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), 0, 0, 0);

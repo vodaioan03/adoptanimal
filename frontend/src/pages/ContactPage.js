@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+//import Cookies from 'js-cookie';
 
 const ContactPage = () => {
   const [firstName, setFirstName] = useState('');
@@ -29,9 +30,7 @@ const ContactPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Trimite mesajul către server sau efectuează alte acțiuni aici
     console.log('Message submitted:', { firstName, lastName, email, phoneNumber, message });
-    // Șterge textul din câmpuri după trimiterea formularului
     setFirstName('');
     setLastName('');
     setEmail('');
@@ -42,8 +41,7 @@ const ContactPage = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="container mx-auto py-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4 text-center">Contact</h1>
-        <div className="max-w-lg mx-auto">
+        <div className="max-w-lg mx-auto mt-10">
           <div className="mb-4 text-center">
             <p className="text-3xl font-bold text-gray-800 mb-4">Contact</p>
           </div>

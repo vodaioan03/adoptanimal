@@ -22,7 +22,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "/member")
+@RequestMapping(path = "/api")
 @Controller
 public class AnimalController {
   private final AnimalServiceImplementation animalService;

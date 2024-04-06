@@ -3,7 +3,7 @@ package adoptanimal.ro.adoptanimal.user.model;
 import java.util.Arrays;
 import java.util.List;
 public enum role {
-  MEMBER(Arrays.asList(permission.USER_ADMIN)),
+  MEMBER(Arrays.asList(permission.USER_MEMBER)),
 
   ADMIN(Arrays.asList(permission.USER_ADMIN, permission.USER_MEMBER)),
 

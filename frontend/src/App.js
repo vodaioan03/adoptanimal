@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginPage from './LoginPage';
-import RegisterPage from './RegisterPage';
-import ContactPage from './ContactPage';
-import HomePage from './Home'; // sau orice altă pagină principală din aplicația ta
-import Navbar from './navbar';
-import Footer from './Footer';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import ContactPage from './pages/ContactPage';
+import HomePage from './pages/Home'; 
+import Navbar from './pages/navbar';
+import Footer from './pages/Footer';
 import './App.css';
+import DogList from './pages/Doglist';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/dogs" element={<DogList />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </div>

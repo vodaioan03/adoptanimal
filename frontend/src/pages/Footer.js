@@ -1,15 +1,16 @@
 import React from 'react';
-import { ReactComponent as InstagramLogo } from './svgs/instagram-icon.svg'; // Importarea logo-ului Instagram ca un SVG
-import { ReactComponent as FacebookLogo } from './svgs/facebook-icon.svg'; // Importarea logo-ului Facebook ca un SVG
+import { ReactComponent as InstagramLogo } from '../images/svgs/instagram-icon.svg'; 
+import { ReactComponent as FacebookLogo } from '../images/svgs/facebook-icon.svg'; 
 import { Link } from 'react-router-dom';
-import dogFooter from './images/dog-footer.png'; // Importați imaginea locală
+import dogFooter from '../images/dog-footer.png'; 
+//import Cookies from 'js-cookie';
 
 const Footer = () => {
   return (
     <footer className="footer" style={{ backgroundColor: '#333', color: '#fff', padding: '2rem', position: 'relative' }}>
       <div className="footer-content" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <div className="footer-left" style={{ textAlign: 'center', marginRight: 'auto' }}>
-          <img src={dogFooter} alt="Address" style={{ width: '75px', height: 'auto', margin: '0 auto' }} /> {/* Centrare imagine */}
+          <img src={dogFooter} alt="Address" style={{ width: '75px', height: 'auto', margin: '0 auto' }} /> 
           <p>Cluj-Napoca, Romania</p>
           <div className="social-icons" style={{ display: 'flex', justifyContent: 'center' }}>
             <a href="https://www.instagram.com/yourshelter" target="_blank" rel="noopener noreferrer" style={{ marginRight: '1rem' }}>

@@ -1,6 +1,7 @@
-import "./main.css"
+import "../css/main.css"
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -19,11 +20,11 @@ const LoginPage = () => {
     updateLoginPageHeight();
 
     window.addEventListener('resize', updateLoginPageHeight);
-    window.addEventListener('load', updateLoginPageHeight); // Adăugăm event listener pentru 'load'
+    window.addEventListener('load', updateLoginPageHeight); 
 
     return () => {
       window.removeEventListener('resize', updateLoginPageHeight);
-      window.removeEventListener('load', updateLoginPageHeight); // Eliberăm event listener-ul pentru 'load'
+      window.removeEventListener('load', updateLoginPageHeight);
     };
   }, []);
 
@@ -37,28 +38,28 @@ const LoginPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const response = await fetch('http://localhost:8080/auth/authenticate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (response.ok) {
-        console.log('Raspuns');
-        console.log(response);
-        console.log('Login successful');
-        navigate('/'); 
-      } else {
-        console.error('Login failed');
-        setError('Invalid username or password.'); 
+    fetch('http://localhost:8080/auth/authenticate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Authentication failed');
       }
-    } catch (error) {
-      console.error('Error during login:', error);
+      return response.json();
+    })
+    .then(data => {
+      Cookies.set('jwtToken', data.jwt, { expires: 7 });
+      console.log(Cookies.get('jwtToken'));
+      navigate('/'); 
+    })
+    .catch(error => {
+      console.error('Error during authentication:', error);
       setError('An unexpected error occurred. Please try again later.');
-    }
+    });
   };
 
   return (

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-const LoginPage = () => {
+const LoginPage = ({ setUser }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -36,6 +36,34 @@ const LoginPage = () => {
     setPassword(event.target.value);
   };
 
+  const getUser = async (setUser) => {
+    try {
+      const jwtToken = Cookies.get('jwtToken');
+      if (!jwtToken) {
+        setUser(null); 
+        return;
+      }
+  
+      const response = await fetch(`http://localhost:8080/user/getUser/${username}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${jwtToken}`,
+      },
+      });
+  
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData); 
+        localStorage.setItem('user', JSON.stringify(userData));
+      } else {
+        setUser(null); 
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      setUser(null);
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     fetch('http://localhost:8080/auth/authenticate', {
@@ -53,7 +81,7 @@ const LoginPage = () => {
     })
     .then(data => {
       Cookies.set('jwtToken', data.jwt, { expires: 7 });
-      console.log(Cookies.get('jwtToken'));
+      getUser(setUser);
       navigate('/'); 
     })
     .catch(error => {

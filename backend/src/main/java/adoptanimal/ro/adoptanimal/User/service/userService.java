@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import adoptanimal.ro.adoptanimal.Exceptions.UserException;
 import adoptanimal.ro.adoptanimal.user.model.myUser;
 import adoptanimal.ro.adoptanimal.user.repository.userRepository;
 import jakarta.validation.ConstraintViolationException;
@@ -34,6 +35,14 @@ public class userService implements UserDetailsService {
       user.setPassword(passwordEncoder.encode(user.getPassword()));
       userRepository.save(user);
     }
+  }
+
+  public myUser getUser(String username) throws UserException{
+    System.err.println(username);
+    Optional<myUser> userFound = userRepository.findUserByUsername(username);
+    System.err.println(userFound.isPresent());
+    if(userFound.isPresent()) return userFound.get();
+    else throw new UserException("User not found");
   }
 
   public Boolean entityPresent(myUser user) {

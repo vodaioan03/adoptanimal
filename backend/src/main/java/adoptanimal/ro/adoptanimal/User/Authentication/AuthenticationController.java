@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import adoptanimal.ro.adoptanimal.Exceptions.UserException;
 import adoptanimal.ro.adoptanimal.user.model.myUser;
 import jakarta.validation.ConstraintViolationException;
 
@@ -24,9 +25,11 @@ public class AuthenticationController {
       return new ResponseEntity<AuthenticationResponse>(authenticatioService.register(request),HttpStatus.OK);
     } catch (ConstraintViolationException e) {
       return new ResponseEntity<>(e.getMessage(),HttpStatus.UNPROCESSABLE_ENTITY);
+    }catch (UserException e) {
+      return new ResponseEntity<>(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
     } catch (Exception e) {
       return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
-    }
+    } 
   }
 
   @PostMapping("/authenticate")

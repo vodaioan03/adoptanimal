@@ -1,7 +1,7 @@
 import React from 'react';
 
 const DogCard = ({ dog }) => {
-  const { idNumber, givenName, breed, birthdayDate, age, createdTime, lastUpdate, image } = dog;
+  const { idNumber, givenName, breed, birthdayDate, age, createdTime, image } = dog;
   const handleAdopt = () => {
     console.log(`Adoptă câinele cu id-ul ${idNumber}`);
   };
@@ -14,6 +14,8 @@ const DogCard = ({ dog }) => {
         <h2 className="dog-name">{givenName}</h2>
         <p className="dog-details">Breed: {breed}</p>
         <p className="dog-details">Age: {age}</p>
+        <p className="dog-details">Birthday Date: {birthdayDate}</p>
+        <p className="dog-details">Added From: {createdTime}</p>
         <button onClick={handleAdopt} className="adopt-button">Adopt</button>
       </div>
     </div>

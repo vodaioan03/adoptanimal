@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 
 import adoptanimal.ro.adoptanimal.config.jwtService;
 import adoptanimal.ro.adoptanimal.user.model.myUser;
+import adoptanimal.ro.adoptanimal.user.model.role;
 import adoptanimal.ro.adoptanimal.user.repository.userRepository;
+import adoptanimal.ro.adoptanimal.user.service.inputVerification;
 
 @Service
 public class AuthenticatioService {
@@ -27,14 +29,18 @@ public class AuthenticatioService {
 
   @Autowired
   private PasswordEncoder passwordEncoder;
+  @Autowired
+  private inputVerification verify;
 
 
   public AuthenticatioService(PasswordEncoder passwordEncoder) {
     this.passwordEncoder = passwordEncoder;
   }
 
-  public AuthenticationResponse register(myUser request) {
-    myUser user = new myUser(request.getUsername(),passwordEncoder.encode(request.getPassword()),request.getRole(),request.getEmail(),request.getPhoneNumber(),request.getFirstName(),request.getLastName(),request.getGender(),request.getAdress(),request.getBirthDate());
+  public AuthenticationResponse register(myUser request) throws Exception {
+    verify.registerVerify(request);
+    String base64 = request.getAvatarPhoto().split(",")[1];
+    myUser user = new myUser(request.getUsername(),passwordEncoder.encode(request.getPassword()),role.MEMBER,request.getEmail(),request.getPhoneNumber(),request.getFirstName(),request.getLastName(),request.getGender(),request.getAdress(),request.getBirthDate(),base64);
     user.setCreatedTime(LocalDateTime.now());
     userRepository.save(user);
     String token = jwtService.generateToken(user, generateExtraClaims(user));

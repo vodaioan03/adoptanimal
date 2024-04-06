@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,27 +16,33 @@ import java.util.List;
 public class myUser implements UserDetails {
   @Id
   private String id;
-  @Indexed(unique = true)
   private String username;
   private String password;
   private role role;
-  @Indexed(unique = true)
   private String email;
-  @Indexed(unique = true)
   private String phoneNumber;
   private String firstName;
   private String lastName;
-  private gender gender;
+  private String gender;
   private address adress;
   private LocalDateTime birthDate;
   private LocalDateTime createdTime;
+  private String avatarPhoto;
+
+  public String getAvatarPhoto() {
+    return avatarPhoto;
+  }
+
+  public void setAvatarPhoto(String avatarPhoto) {
+    this.avatarPhoto = avatarPhoto;
+  }
 
   public myUser() {
 
   }
 
   public myUser(String username, String password, role role, String email, String phoneNumber, String firstName,
-      String lastName, gender gender, address adress, LocalDateTime birthDate) {
+      String lastName, String gender, address adress, LocalDateTime birthDate, String avatar) {
     this.username = username;
     this.password = password;
     this.role = role;
@@ -48,6 +53,7 @@ public class myUser implements UserDetails {
     this.gender = gender;
     this.adress = adress;
     this.birthDate = birthDate;
+    this.avatarPhoto = avatar;
   }
   public myUser(String username, String password, role role) {
     this.username = username;
@@ -119,10 +125,10 @@ public class myUser implements UserDetails {
   public void setLastName(String lastName) {
     this.lastName = lastName;
   }
-  public gender getGender() {
+  public String getGender() {
     return gender;
   }
-  public void setGender(gender gender) {
+  public void setGender(String gender) {
     this.gender = gender;
   }
   public address getAdress() {

@@ -16,6 +16,8 @@ const RegisterPage = () => {
   const [address, setAddress] = useState('');
   const [zipCode, setZipCode] = useState('');
   const [error, setError] = useState('');
+  const [avatar, setAvatar] = useState(null);
+  const [avatarError, setAvatarError] = useState('');
   const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
@@ -70,6 +72,63 @@ const RegisterPage = () => {
     setZipCode(event.target.value);
   };
 
+  const handleAvatarChange = (event) => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      if (selectedFile.size > 1024 * 1024) { // 1 MB limit
+        setAvatarError('File size exceeds 1MB limit');
+        return;
+      }
+  
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        // Creăm o imagine pentru a redimensiona și comprima
+        const img = new Image();
+        img.src = reader.result;
+  
+        // Așteptăm încărcarea imaginii
+        img.onload = function() {
+          // Creăm un element canvas
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+  
+          // Redimensionăm canvas-ul conform noilor dimensiuni
+          const maxWidth = 300; // Lățimea maximă dorită
+          const maxHeight = 300; // Înălțimea maximă dorită
+          let width = img.width;
+          let height = img.height;
+  
+          if (width > height) {
+            if (width > maxWidth) {
+              height *= maxWidth / width;
+              width = maxWidth;
+            }
+          } else {
+            if (height > maxHeight) {
+              width *= maxHeight / height;
+              height = maxHeight;
+            }
+          }
+  
+          canvas.width = width;
+          canvas.height = height;
+  
+          // Desenăm imaginea redimensionată pe canvas
+          ctx.drawImage(img, 0, 0, width, height);
+  
+          // Comprimăm imaginea
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.7); // Calitatea compresiei între 0 și 1
+  
+          // Setăm imaginea comprimată ca avatar
+          setAvatar(compressedDataUrl);
+          setAvatarError('');
+        };
+      };
+      reader.readAsDataURL(selectedFile);
+    }
+  };
+  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -101,7 +160,8 @@ const RegisterPage = () => {
             city,
             address,
             zipCode
-          }
+          },
+          avatarPhoto:avatar
         }),
       });
 
@@ -146,6 +206,19 @@ const RegisterPage = () => {
                 required
               />
             </div>
+          </div>
+          <div className="mb-4 flex items-center">
+            <label htmlFor="avatar" className="block text-gray-700 text-sm font-bold mb-2 mr-2">Avatar</label>
+            <div className='flex w-full justify-center'>
+              <input
+                type="file"
+                id="avatar"
+                onChange={handleAvatarChange}
+                accept="image/*"
+                className="flex-grow px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+              />
+            </div>
+            {avatarError && <p className="text-red-500 mt-2">{avatarError}</p>}
           </div>
           <div className="flex justify-between mb-4">
             <div className="w-1/2 mr-2">
@@ -229,7 +302,7 @@ const RegisterPage = () => {
               required
             >
               <option value="">Select Gender</option>
-              <option value="male">Male</option>
+              <option value="MALE">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
             </select>

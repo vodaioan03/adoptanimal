@@ -29,9 +29,28 @@ public class UserController {
     } catch (UserException e) {
       return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
     }
-    
-
   }
+
+  @PostMapping("/changeEmail/{username}")
+  public ResponseEntity<?> changeEmail(@PathVariable("username") String username,@RequestBody String request) {
+    try {
+      service.changeMail(username,request);
+      return new ResponseEntity<myUser>(service.getUser(username),HttpStatus.OK);
+    } catch (UserException e) {
+      return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+    }
+  }
+
+  @PostMapping("/changeNumber/{username}")
+  public ResponseEntity<?> changeNumber(@PathVariable("username") String username,@RequestBody String request) {
+    try {
+      service.changeNumber(username,request);
+      return new ResponseEntity<myUser>(service.getUser(username),HttpStatus.OK);
+    } catch (UserException e) {
+      return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+    }
+  }
+
   @GetMapping("/test")
   public ResponseEntity<?> test() {
     System.err.println("INTRA");

@@ -23,6 +23,8 @@ public class userService implements UserDetailsService {
   private userRepository userRepository;
   @Autowired
   private PasswordEncoder passwordEncoder;
+  @Autowired
+  private inputVerification verify;
 
 
   
@@ -38,11 +40,35 @@ public class userService implements UserDetailsService {
   }
 
   public myUser getUser(String username) throws UserException{
-    System.err.println(username);
     Optional<myUser> userFound = userRepository.findUserByUsername(username);
-    System.err.println(userFound.isPresent());
     if(userFound.isPresent()) return userFound.get();
     else throw new UserException("User not found");
+  }
+
+  public void changeMail(String username, String email) throws UserException{
+    Optional<myUser> userFound = userRepository.findUserByUsername(username);
+    if(userFound.isPresent()) {
+      myUser user = userFound.get();
+      if(verify.emailVerification(email)) {
+        user.setEmail(email);
+        userRepository.save(user);
+      }
+      else throw new UserException(UserException.invalidMail(email));
+    }
+    else throw new UserException(UserException.invalidUser(username));
+  }
+
+  public void changeNumber(String username, String phoneNumber) throws UserException{
+    Optional<myUser> userFound = userRepository.findUserByUsername(username);
+    if(userFound.isPresent()) {
+      myUser user = userFound.get();
+      if(!verify.numberExist(phoneNumber)) {
+        user.setPhoneNumber(phoneNumber);
+        userRepository.save(user);
+      }
+      else throw new UserException(UserException.invalidNumber(phoneNumber));
+    }
+    else throw new UserException(UserException.invalidUser(username));
   }
 
   public Boolean entityPresent(myUser user) {

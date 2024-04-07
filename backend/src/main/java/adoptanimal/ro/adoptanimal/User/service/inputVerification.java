@@ -30,6 +30,7 @@ public class inputVerification {
   }
 
   public boolean numberExist(String number) {
+    if(!number.matches("^[0-9]*$")) return true;
     Optional<myUser> userFound = repository.findUserByPhoneNumber(number);
     if(userFound.isPresent()) return true;
     return false;

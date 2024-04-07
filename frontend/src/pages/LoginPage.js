@@ -80,6 +80,7 @@ const LoginPage = ({ setUser }) => {
       return response.json();
     })
     .then(data => {
+      Cookies.remove('jwtToken');
       Cookies.set('jwtToken', data.jwt, { expires: 1 });
       getUser(setUser);
       navigate('/'); 

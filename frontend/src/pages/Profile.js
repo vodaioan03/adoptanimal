@@ -15,27 +15,74 @@ const ProfilePage = ({ user, setUser }) => {
   const [newLastName, setNewLastName] = useState(user.lastName);
   const navigate = useNavigate();
 
-  const handleEmailChange = () => {
-    console.log('Email changed to:', newEmail);
-    setEditingEmail(false);
+  const handleEmailChange = async() => {
+
+    try {
+      const jwtToken = Cookies.get('jwtToken');
+      if (!jwtToken) {
+        return;
+      }
+      console.log(user);
+      const response = await fetch(`http://localhost:8080/user/changeEmail/${user.username}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${jwtToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: newEmail
+      });
+  
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData); 
+        localStorage.setItem('user', JSON.stringify(userData));
+        setEditingEmail(false);
+      } 
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      setUser(null);
+    }
   };
 
-  const handlePasswordChange = () => {
+  const handlePasswordChange = async() => {
     console.log('Password changed to:', newPassword);
     setEditingPassword(false);
   };
 
-  const handlePhoneNumberChange = () => {
-    console.log('Phone number changed to:', newPhoneNumber);
-    setEditingPhoneNumber(false);
+  const handlePhoneNumberChange = async() => {
+
+    try {
+      const jwtToken = Cookies.get('jwtToken');
+      if (!jwtToken) {
+        return;
+      }
+  
+      const response = await fetch(`http://localhost:8080/user/changeNumber/${user.username}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${jwtToken}`,
+      },
+      body: newPhoneNumber
+      });
+  
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData); 
+        localStorage.setItem('user', JSON.stringify(userData));
+        setEditingPhoneNumber(false);
+      } 
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      setUser(null);
+    }
   };
 
-  const handleFirstNameChange = () => {
+  const handleFirstNameChange = async() => {
     console.log('First Name changed to:', newFirstName);
     setEditingFirstName(false);
   };
 
-  const handleLastNameChange = () => {
+  const handleLastNameChange = async() => {
     console.log('Last Name changed to:', newLastName);
     setEditingLastName(false);
   };

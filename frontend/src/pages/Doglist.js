@@ -6,7 +6,6 @@ import Cookies from 'js-cookie';
 const DogList = () => {
   console.log('Component rendered');
   const [dogs, setDogs] = useState([]);
-  const [error, setError] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,7 +26,6 @@ const DogList = () => {
         setDogs(data);
       } catch (error) {
         console.error('Error fetching dogs:', error);
-        setError('An unexpected error occurred. Please try again later.');
       }
     };
 

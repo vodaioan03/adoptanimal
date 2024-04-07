@@ -25,6 +25,7 @@ public class UserController {
 
   @GetMapping("/getUser/{username}")
   public ResponseEntity<?> getUser(@PathVariable("username") String username) {
+    //TODO: add verify for jwt and username
     try {
       return new ResponseEntity<myUser>(service.getUser(username),HttpStatus.OK);
     } catch (UserException e) {
@@ -34,6 +35,7 @@ public class UserController {
 
   @PostMapping("/changeEmail/{username}")
   public ResponseEntity<?> changeEmail(@PathVariable("username") String username,@RequestBody String request) {
+    //TODO: add verify for jwt and username
     try {
       service.changeMail(username,request);
       return new ResponseEntity<myUser>(service.getUser(username),HttpStatus.OK);
@@ -44,6 +46,7 @@ public class UserController {
 
   @PostMapping("/changeNumber/{username}")
   public ResponseEntity<?> changeNumber(@PathVariable("username") String username,@RequestBody String request) {
+    //TODO: add verify for jwt and username
     try {
       service.changeNumber(username,request);
       return new ResponseEntity<myUser>(service.getUser(username),HttpStatus.OK);
@@ -54,6 +57,7 @@ public class UserController {
 
   @PostMapping("/changeFirstName/{username}")
   public ResponseEntity<?> changeFirstName(@PathVariable("username") String username,@RequestBody String request) {
+    //TODO: add verify for jwt and username
     try {
       service.changeFirstName(username,request);
       return new ResponseEntity<myUser>(service.getUser(username),HttpStatus.OK);
@@ -64,6 +68,7 @@ public class UserController {
 
   @PostMapping("/changeLastName/{username}")
   public ResponseEntity<?> changeLastName(@PathVariable("username") String username,@RequestBody String request) {
+    //TODO: add verify for jwt and username
     try {
       service.changeLastName(username,request);
       return new ResponseEntity<myUser>(service.getUser(username),HttpStatus.OK);
@@ -74,18 +79,12 @@ public class UserController {
 
   @PostMapping("/changePassword/{username}")
   public ResponseEntity<?> changePassword(@PathVariable("username") String username,@RequestBody String request) {
+    //TODO: add verify for jwt and username
     try {
       service.changePassword(username,request);
       return new ResponseEntity<myUser>(service.getUser(username),HttpStatus.OK);
     } catch (UserException e) {
       return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
     }
-  }
-
-
-  @GetMapping("/test")
-  public ResponseEntity<?> test() {
-    System.err.println("INTRA");
-    return new ResponseEntity<>("EOK",HttpStatus.OK); 
   }
 }

@@ -30,7 +30,7 @@
 
 ## To-Do List:
 - [ ] Finalizing the design of the user interface.
-- **[ ] Adding more verification for security in backend.**
+**- [ ] Adding more verification for security in backend.🔴**
 - [ ] Implementing pages for dog details and the adoption process.
-- [ ] Adding pages for user account management and adoption applications.
-- [ ] Testing and optimizing the application for public release.
+**- [ ] Adding pages for user account management and adoption applications.🔴**
+**- [ ] Testing and optimizing the application for public release[ ALPHA ].🔴**

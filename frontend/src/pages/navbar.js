@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 const Navbar = ({ user, setUser }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const menuRef = useRef(null);
+  const menuRef = useRef(false);
 
   useEffect(() => {
     const handleOutsideClick = (event) => {

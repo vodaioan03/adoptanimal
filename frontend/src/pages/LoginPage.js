@@ -80,7 +80,7 @@ const LoginPage = ({ setUser }) => {
       return response.json();
     })
     .then(data => {
-      Cookies.set('jwtToken', data.jwt, { expires: 7 });
+      Cookies.set('jwtToken', data.jwt, { expires: 1 });
       getUser(setUser);
       navigate('/'); 
     })

@@ -102,41 +102,11 @@
   margin-bottom: 20px; /* Spațiu între titlu și testimoniale */
 }
 
-.cta {
-  background-color: #485a7f; /* Culoarea gri */
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  margin-top: 30px;
-}
-
-.cta-title {
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: white;
-}
-
-.cta-button {
-  padding: 15px 30px;
-  background-color: #007bff; /* Culoarea de fundal */
-  color: #fff;
-  font-size: 18px;
-  font-weight: bold;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.cta-button:hover {
-  background-color: #0056b3; /* Culoarea de fundal la hover */
-}
-
 .dog-images {
   display: flex;
   justify-content: space-around;
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .dog-images img {

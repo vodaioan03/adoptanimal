@@ -47,12 +47,6 @@ const HomePage = () => {
         <button className="next-button" onClick={handleNextTestimonial}>{">"}</button>
       </div>
 
-
-      <div className="cta">
-        <h2 className="cta-title">Vrei să adopți?</h2>
-        <a href="/dogs" className="cta-button">ADOPTĂ ACUM</a>
-      </div>
-
       <div className="dog-images">
         <img src={dog1} alt="Dog 1" className="dog-image" />
         <img src={dog2} alt="Dog 2" className="dog-image" />

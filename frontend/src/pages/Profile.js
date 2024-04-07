@@ -9,6 +9,10 @@ const ProfilePage = ({ user, setUser }) => {
   const [newPassword, setNewPassword] = useState('');
   const [editingPhoneNumber, setEditingPhoneNumber] = useState(false);
   const [newPhoneNumber, setNewPhoneNumber] = useState(user.phoneNumber);
+  const [editingFirstName, setEditingFirstName] = useState(false);
+  const [newFirstName, setNewFirstName] = useState(user.firstName);
+  const [editingLastName, setEditingLastName] = useState(false);
+  const [newLastName, setNewLastName] = useState(user.lastName);
   const navigate = useNavigate();
 
   const handleEmailChange = () => {
@@ -24,6 +28,16 @@ const ProfilePage = ({ user, setUser }) => {
   const handlePhoneNumberChange = () => {
     console.log('Phone number changed to:', newPhoneNumber);
     setEditingPhoneNumber(false);
+  };
+
+  const handleFirstNameChange = () => {
+    console.log('First Name changed to:', newFirstName);
+    setEditingFirstName(false);
+  };
+
+  const handleLastNameChange = () => {
+    console.log('Last Name changed to:', newLastName);
+    setEditingLastName(false);
   };
 
   const handleLogout = () => {
@@ -83,11 +97,41 @@ const ProfilePage = ({ user, setUser }) => {
             </div>
             <div className="mb-4">
               <div className="text-gray-700 text-sm font-bold mb-2">First Name:</div>
-              <span>{user.firstName}</span>
+              {editingFirstName ? (
+                <div className="flex">
+                  <input
+                    type="text"
+                    value={newFirstName}
+                    onChange={(e) => setNewFirstName(e.target.value)}
+                    className="mr-2 border border-gray-400 px-2 py-1 rounded"
+                  />
+                  <button onClick={handleFirstNameChange} className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">Save</button>
+                </div>
+              ) : (
+                <div className="flex items-center">
+                  <span>{user.firstName}</span>
+                  <button onClick={() => setEditingFirstName(true)} className="ml-2 text-sm text-blue-500 hover:underline">Change</button>
+                </div>
+              )}
             </div>
             <div className="mb-4">
               <div className="text-gray-700 text-sm font-bold mb-2">Last Name:</div>
-              <span>{user.lastName}</span>
+              {editingLastName ? (
+                <div className="flex">
+                  <input
+                    type="text"
+                    value={newLastName}
+                    onChange={(e) => setNewLastName(e.target.value)}
+                    className="mr-2 border border-gray-400 px-2 py-1 rounded"
+                  />
+                  <button onClick={handleLastNameChange} className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">Save</button>
+                </div>
+              ) : (
+                <div className="flex items-center">
+                  <span>{user.lastName}</span>
+                  <button onClick={() => setEditingLastName(true)} className="ml-2 text-sm text-blue-500 hover:underline">Change</button>
+                </div>
+              )}
             </div>
             <div className="mb-4">
               <div className="text-gray-700 text-sm font-bold mb-2">Gender:</div>

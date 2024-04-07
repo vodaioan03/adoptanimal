@@ -4,13 +4,14 @@ import DogCard from './DogCard';
 import Cookies from 'js-cookie';
 
 const DogList = () => {
+  console.log('Component rendered');
   const [dogs, setDogs] = useState([]);
   const [error, setError] = useState(null);
-
   useEffect(() => {
-    const fetchDogs = async () => {
+    const fetchData = async () => {
       try {
         const token = Cookies.get('jwtToken');
+        
         const response = await fetch('http://localhost:8080/api/getAnimals', {
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -18,9 +19,10 @@ const DogList = () => {
         });
 
         if (!response.ok) {
+          console.log('Not ok');
           throw new Error('Failed to fetch dogs');
         }
-
+        
         const data = await response.json();
         setDogs(data);
       } catch (error) {
@@ -29,7 +31,7 @@ const DogList = () => {
       }
     };
 
-    fetchDogs();
+    fetchData();
   }, []); 
 
   return (
@@ -39,8 +41,7 @@ const DogList = () => {
           <h1 className="text-3xl font-bold text-gray-800 mb-4">Available Dogs</h1>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {error && <p className="error-message">{error}</p>}
-          {dogs.map((dog,index) => (
+          {dogs.map((dog, index) => (
             <DogCard key={index} dog={dog} />
           ))}
         </div>

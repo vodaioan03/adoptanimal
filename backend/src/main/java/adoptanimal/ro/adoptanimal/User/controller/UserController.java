@@ -3,6 +3,7 @@ package adoptanimal.ro.adoptanimal.user.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,6 +51,37 @@ public class UserController {
       return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
     }
   }
+
+  @PostMapping("/changeFirstName/{username}")
+  public ResponseEntity<?> changeFirstName(@PathVariable("username") String username,@RequestBody String request) {
+    try {
+      service.changeFirstName(username,request);
+      return new ResponseEntity<myUser>(service.getUser(username),HttpStatus.OK);
+    } catch (UserException e) {
+      return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+    }
+  }
+
+  @PostMapping("/changeLastName/{username}")
+  public ResponseEntity<?> changeLastName(@PathVariable("username") String username,@RequestBody String request) {
+    try {
+      service.changeLastName(username,request);
+      return new ResponseEntity<myUser>(service.getUser(username),HttpStatus.OK);
+    } catch (UserException e) {
+      return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+    }
+  }
+
+  @PostMapping("/changePassword/{username}")
+  public ResponseEntity<?> changePassword(@PathVariable("username") String username,@RequestBody String request) {
+    try {
+      service.changePassword(username,request);
+      return new ResponseEntity<myUser>(service.getUser(username),HttpStatus.OK);
+    } catch (UserException e) {
+      return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+    }
+  }
+
 
   @GetMapping("/test")
   public ResponseEntity<?> test() {

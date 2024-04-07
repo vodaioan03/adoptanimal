@@ -45,8 +45,29 @@ const ProfilePage = ({ user, setUser }) => {
   };
 
   const handlePasswordChange = async() => {
-    console.log('Password changed to:', newPassword);
-    setEditingPassword(false);
+
+    try {
+      const jwtToken = Cookies.get('jwtToken');
+      if (!jwtToken) {
+        return;
+      }
+  
+      const response = await fetch(`http://localhost:8080/user/changePassword/${user.username}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${jwtToken}`,
+      },
+      body: newPassword
+      });
+  
+      if (response.ok) {
+        setEditingPassword(false);
+        handleLogout();
+      } 
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      setUser(null);
+    }
   };
 
   const handlePhoneNumberChange = async() => {
@@ -78,13 +99,57 @@ const ProfilePage = ({ user, setUser }) => {
   };
 
   const handleFirstNameChange = async() => {
-    console.log('First Name changed to:', newFirstName);
-    setEditingFirstName(false);
+    try {
+      const jwtToken = Cookies.get('jwtToken');
+      if (!jwtToken) {
+        return;
+      }
+  
+      const response = await fetch(`http://localhost:8080/user/changeFirstName/${user.username}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${jwtToken}`,
+      },
+      body: newFirstName
+      });
+  
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData); 
+        localStorage.setItem('user', JSON.stringify(userData));
+        setEditingFirstName(false);
+      } 
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      setUser(null);
+    }
   };
 
   const handleLastNameChange = async() => {
-    console.log('Last Name changed to:', newLastName);
-    setEditingLastName(false);
+    try {
+      const jwtToken = Cookies.get('jwtToken');
+      if (!jwtToken) {
+        return;
+      }
+  
+      const response = await fetch(`http://localhost:8080/user/changeLastName/${user.username}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${jwtToken}`,
+      },
+      body: newLastName
+      });
+  
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData); 
+        localStorage.setItem('user', JSON.stringify(userData));
+        setEditingLastName(false);
+      } 
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      setUser(null);
+    }
   };
 
   const handleLogout = () => {

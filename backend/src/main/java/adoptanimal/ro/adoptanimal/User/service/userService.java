@@ -71,6 +71,36 @@ public class userService implements UserDetailsService {
     else throw new UserException(UserException.invalidUser(username));
   }
 
+  public void changeFirstName(String username, String firstName) throws UserException{
+    Optional<myUser> userFound = userRepository.findUserByUsername(username);
+    if(userFound.isPresent()) {
+      myUser user = userFound.get();
+      user.setFirstName(firstName);
+      userRepository.save(user);
+    }
+    else throw new UserException(UserException.invalidUser(username));
+  }
+
+  public void changeLastName(String username, String lastName) throws UserException{
+    Optional<myUser> userFound = userRepository.findUserByUsername(username);
+    if(userFound.isPresent()) {
+      myUser user = userFound.get();
+      user.setLastName(lastName);
+      userRepository.save(user);
+    }
+    else throw new UserException(UserException.invalidUser(username));
+  }
+
+  public void changePassword(String username, String password) throws UserException{
+    Optional<myUser> userFound = userRepository.findUserByUsername(username);
+    if(userFound.isPresent()) {
+      myUser user = userFound.get();
+      user.setPassword(passwordEncoder.encode(password));
+      userRepository.save(user);
+    }
+    else throw new UserException(UserException.invalidUser(username));
+  }
+
   public Boolean entityPresent(myUser user) {
     Optional<myUser> userFound = userRepository.findUserByUsername(user.getUsername());
     return userFound.isPresent();
